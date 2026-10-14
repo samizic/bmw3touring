@@ -57,10 +57,11 @@ npm run check-gps    # only reports; exits with an error if anything still has l
 The deploy workflow runs the same check and **refuses to publish** if any file still contains a
 location. Requires `exiftool` (`brew install exiftool`).
 
-## Adding a maintenance / DIY job
+## Adding a DIY & Service job
 
 Each job is a folder in `src/content/maintenance/`. The folder name becomes the URL, so
-`2025-06-oil-service/` is published at `/bmw3touring/maintenance/2025-06-oil-service`.
+`2025-06-oil-service/` is published at `/bmw3touring/diy-service/2025-06-oil-service`.
+(The folder and code keep the internal name `maintenance`; old `/maintenance/…` links redirect.)
 
 1. **Copy the template:**
    ```bash
@@ -96,6 +97,23 @@ node scripts/build-blueprint.mjs path/to/Dimensions-BMW-3-Series-Touring.svg
 
 Dimension values come from `dimensions` in `src/data/specs.ts`.
 
+## Adding gallery photos
+
+The Gallery page is built from `src/data/gallery.ts` (chapters, captions, header photo) and the
+image files in `src/assets/gallery/`.
+
+1. **Check the photo first**: licence plates (yours and other cars'), navigation screens,
+   addresses, faces or reflections.
+2. **Strip all metadata** (GPS, camera, dates, embedded thumbnails and HDR gain maps) and keep only
+   the colour profile and orientation:
+   ```bash
+   exiftool -all= -trailer:all= -tagsfromfile @ -icc_profile -orientation -o src/assets/gallery/new-photo.jpg "/path/to/original.jpg"
+   ```
+   Use lower-case file names without `~`.
+3. **Add it to a chapter** in `src/data/gallery.ts` with a short caption. The caption is also the
+   image's alt text. The first photo of each chapter is shown large.
+4. Run `npm run check-gps` and `npm run dev` to check, then commit.
+
 ## Hero video
 
 The homepage hero shows `front-detail.jpg` instantly, then fades in a muted video loop once it can
@@ -121,8 +139,8 @@ One-time setup: **GitHub repo → Settings → Pages → Build and deployment �
 
 - [x] Homepage
 - [x] Technical specs — edit values in `src/data/specs.ts`
-- [ ] Gallery with lightbox
-- [x] Maintenance & DIY log — see "Adding a maintenance / DIY job"
+- [x] Gallery with lightbox — see "Adding gallery photos"
+- [x] DIY & Service log — see "Adding a DIY & Service job"
 
 ## Fonts & branding
 

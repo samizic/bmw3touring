@@ -1,0 +1,121 @@
+---
+import type { ImageMetadata } from 'astro';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import LightboxGallery from '../components/LightboxGallery.astro';
+import { chapters, header } from '../data/gallery';
+
+const files = import.meta.glob<{ default: ImageMetadata }>('/src/assets/gallery/*.{jpg,jpeg,png,webp}', { eager: true });
+const img = (file: string) => {
+  const mod = files[`/src/assets/gallery/${file}`];
+  if (!mod) throw new Error(`Gallery photo not found: src/assets/gallery/${file}`);
+  return mod.default;
+};
+const total = chapters.reduce((n, c) => n + c.photos.length, 0);
+---
+
+<Base title="Gallery" description="Photos of my Alpine White BMW 330d Touring: coast roads, mountain fog, winter trips and details.">
+  <PageHero eyebrow="330d Touring · Photos" title="Gallery" image={img(header.file)} alt={header.alt} focus={header.focus} align="right">
+    <p class="lede">{total} photos · {chapters.length} chapters</p>
+  </PageHero>
+
+  <nav class="chapters container" aria-label="Gallery chapters">
+    <ol>
+      {chapters.map((c, i) => (
+        <li><a href={`#${c.id}`}><span class="num">{String(i + 1).padStart(2, '0')}</span>{c.title}</a></li>
+      ))}
+    </ol>
+  </nav>
+
+  <div class="container chapters-list">
+    {chapters.map((c, i) => (
+      <section id={c.id} class="chapter" aria-labelledby={`${c.id}-title`}>
+        <header data-reveal>
+          <span class="num">{String(i + 1).padStart(2, '0')}</span>
+          <h2 id={`${c.id}-title`}>{c.title}</h2>
+          <p class="when">{c.when} · {c.photos.length} {c.photos.length === 1 ? 'photo' : 'photos'}</p>
+        </header>
+        <LightboxGallery feature photos={c.photos.map((p) => ({ src: img(p.file), caption: p.caption }))} />
+      </section>
+    ))}
+  </div>
+</Base>
+
+<style>
+  .lede {
+    margin: 16px 0 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .chapters {
+    position: sticky;
+    top: var(--header-h);
+    z-index: 10;
+    padding-block: 12px;
+    background: rgb(11 11 13 / 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .chapters::-webkit-scrollbar { display: none; }
+  .chapters ol {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .chapters a {
+    display: inline-flex;
+    gap: 8px;
+    white-space: nowrap;
+    padding: 6px 14px;
+    border: 1px solid var(--line);
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .chapters a:hover { color: var(--text); border-color: var(--m-light-blue); }
+  .num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--m-light-blue);
+  }
+
+  .chapters-list {
+    display: grid;
+    gap: clamp(64px, 9vw, 120px);
+    padding-block: clamp(48px, 7vw, 96px) clamp(80px, 10vw, 140px);
+  }
+  .chapter { scroll-margin-top: calc(var(--header-h) + 72px); }
+  .chapter header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    column-gap: 16px;
+    margin-bottom: 24px;
+  }
+  .chapter .num { font-size: 1rem; letter-spacing: 0.1em; }
+  h2 { font-size: clamp(2.25rem, 5vw, 4rem); }
+  .when {
+    grid-column: 2;
+    margin: 8px 0 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+</style>
