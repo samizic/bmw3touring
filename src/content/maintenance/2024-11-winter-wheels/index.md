@@ -3,22 +3,22 @@ title: Winter wheels & tyres
 date: 2024-11-14
 category: Tyres
 summary: A new dedicated winter set. 18″ BMW Style 780 wheels in a square setup, on 225/45 R18 Michelin Pilot Alpin 5 tyres.
-cover: ./photos/02-new-set.jpg
+cover: ./photos/09-new-set.jpg
 coverAlt: Four new 18-inch Style 780 wheels with Michelin Pilot Alpin 5 winter tyres lined up in the garage
 products:
   - 4 × BMW Style 780 wheel, 18″
   - 4 × Michelin Pilot Alpin 5, 225/45 R18 95V XL
 captions:
-  01-old-and-new-wheels.jpg: New 18″ Style 780 winter wheel next to the 19″ Style 793 summer wheel.
-  02-new-set.jpg: The new set, ready to go on.
-  03-pilot-alpin-5-close-up.jpg: Michelin Pilot Alpin 5, 225/45 R18 95V.
-  04-front-wheel-and-headlight.jpg: Front wheel and laser light.
-  05-side-profile.jpg: Side profile on the winter set.
-  06-rear-wheel.jpg: Rear wheel. The same size front and rear.
-  07-front-three-quarter.jpg: Front three-quarter in the garage.
-  08-fuel-stop.jpg: On the road, December.
-  09-ski-trip-side.jpg: Ski trip, roof box on.
-  10-ski-trip-rear.jpg: Snow-covered car park in the Alps.
+  01-pilot-alpin-5-close-up.jpg: Michelin Pilot Alpin 5, 225/45 R18 95V.
+  02-front-wheel-and-headlight.jpg: Front wheel and laser light.
+  03-ski-trip-rear.jpg: Snow-covered car park in the Alps.
+  04-ski-trip-side.jpg: Ski trip, roof box on.
+  05-fuel-stop.jpg: On the road, December.
+  06-side-profile.jpg: Side profile on the winter set.
+  07-rear-wheel.jpg: Rear wheel. The same size front and rear.
+  08-front-three-quarter.jpg: Front three-quarter in the garage.
+  09-new-set.jpg: The new set, ready to go on.
+  10-old-and-new-wheels.jpg: New 18″ Style 780 winter wheel next to the 19″ Style 793 summer wheel.
 ---
 
 The 19″ summer wheels with their low-profile tyres aren't made for snow, so the car got a

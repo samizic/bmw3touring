@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import { getJobs, getJobPhotos, formatDate, formatKm } from '../../lib/maintenance';
 import { url } from '../../lib/url';
-import heroImage from '../../assets/pages/diy-service-hero.jpg';
+import heroImage from '../../assets/pages/diy-service-hero-studio.jpg';
 
 const jobs = await getJobs();
 
@@ -20,8 +20,8 @@ const years = [...new Set(jobs.map((j) => j.data.date.getFullYear()))];
     eyebrow="Service log"
     title="DIY & Service"
     image={heroImage}
-    alt="The 330d Touring in a detailing studio, wheels covered"
-    focus="50% 40%"
+    alt="The freshly detailed Alpine White 330d Touring in a workshop, red tool chest beside it"
+    focus="50% 58%"
   >
     <p class="lede">
       {jobs.length} {jobs.length === 1 ? 'job' : 'jobs'} logged. Every service, upgrade and DIY job, with photos.
