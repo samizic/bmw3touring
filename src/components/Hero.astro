@@ -1,40 +1,21 @@
 ---
-import { existsSync } from 'node:fs';
 import { Picture } from 'astro:assets';
-import poster from '../assets/home/front-detail.jpg';
-
-// The video loop is optional: it only renders once the encoded files exist in public/video/.
-const hasVideo = existsSync('public/video/hero-1080.mp4');
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Full-resolution (4080 px) source, so the hero stays sharp on large retina screens
+import poster from '../assets/gallery/pxl_20240217_124148987_wheels.jpg';
 ---
 
 <section class="hero" aria-label="BMW 330d Touring">
   <div class="media">
     <Picture
       src={poster}
-      alt="Front of the Alpine White 330d Touring: kidney grille and laser headlight"
-      widths={[640, 1024, 1440, 2000]}
-      sizes="100vw"
+      alt="The Alpine White 330d Touring parked on a coastal road above a calm Adriatic sea"
+      widths={[640, 1024, 1440, 2000, 2880, 3840]}
+      sizes="130vw"
       formats={['avif', 'webp']}
       loading="eager"
       fetchpriority="high"
       class="poster"
     />
-    {hasVideo && (
-      <video
-        class="video"
-        muted
-        loop
-        playsinline
-        preload="none"
-        aria-hidden="true"
-        data-hero-video
-        data-sources={JSON.stringify({
-          '720': [`${base}/video/hero-720.webm`, `${base}/video/hero-720.mp4`],
-          '1080': [`${base}/video/hero-1080.webm`, `${base}/video/hero-1080.mp4`],
-        })}
-      />
-    )}
     <div class="shade" aria-hidden="true"></div>
   </div>
 
@@ -70,37 +51,39 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     inset: 0;
     z-index: -1;
   }
-  .media :global(.poster),
-  .video {
+  .media :global(.poster) {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+  /* The photo is widened past the right edge (anchored left) so the car sits clear of the title */
   .media :global(.poster) {
-    object-position: 60% 50%;
+    right: auto;
+    width: var(--hero-w, 120%);
+    max-width: none;
+    object-position: 50% 62%;
+    transform-origin: 100% 60%;
     animation: hero-zoom 14s var(--ease) both;
   }
-  .video {
-    opacity: 0;
-    transition: opacity 1.2s var(--ease);
-  }
-  .video.is-playing { opacity: 1; }
   .shade {
     position: absolute;
     inset: 0;
     background:
+      /* top: keeps the menu readable */
       linear-gradient(180deg, rgb(11 11 13 / 0.55) 0%, rgb(11 11 13 / 0) 28%),
-      linear-gradient(0deg, var(--bg) 0%, rgb(11 11 13 / 0.6) 32%, rgb(11 11 13 / 0) 62%),
-      linear-gradient(90deg, rgb(11 11 13 / 0.55) 0%, rgb(11 11 13 / 0) 55%);
+      /* bottom: short fade into the page, full width */
+      linear-gradient(0deg, var(--bg) 0%, rgb(11 11 13 / 0.35) 12%, rgb(11 11 13 / 0) 26%),
+      /* left: darkens behind the title only, clear of the car */
+      radial-gradient(ellipse 60% 75% at 0% 78%, rgb(11 11 13 / 0.78) 0%, rgb(11 11 13 / 0.45) 50%, rgb(11 11 13 / 0) 100%);
   }
 
   .content {
     padding-bottom: clamp(72px, 12vh, 140px);
   }
   h1 {
-    font-size: clamp(4.5rem, 16vw, 13rem);
+    font-size: clamp(4.5rem, 11.5vw, 13rem);
     margin-block: 12px 28px;
   }
   .line {
@@ -164,6 +147,11 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     100% { opacity: 0; transform: translateY(14px); }
   }
 
+  /* Narrow screens: the photo is cropped at the sides instead, so aim the crop at the car */
+  @media (max-aspect-ratio: 3/2) {
+    .hero { --hero-w: 100%; }
+    .media :global(.poster) { object-position: 78% 62%; }
+  }
   @media (max-width: 760px) {
     .outline { -webkit-text-stroke-width: 1.5px; }
     .scroll-cue { display: none; }
@@ -173,24 +161,3 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   }
 </style>
 
-<script>
-  // Load the background loop only when it makes sense: not for reduced-motion
-  // or data-saver users. Mobile gets the 720p encode.
-  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
-  const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  if (video && !reduce && !conn?.saveData) {
-    const res = window.innerWidth * window.devicePixelRatio > 1600 ? '1080' : '720';
-    const sources: Record<string, string[]> = JSON.parse(video.dataset.sources!);
-    for (const src of sources[res]) {
-      const s = document.createElement('source');
-      s.src = src;
-      s.type = src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
-      video.append(s);
-    }
-    video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
-    video.load();
-    video.play().catch(() => {});
-  }
-</script>

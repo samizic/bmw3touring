@@ -60,13 +60,15 @@ const { image, alt, eyebrow, title, reverse = false, focus = '50% 50%', studio =
     transition: transform 1.4s var(--ease);
   }
   .frame:hover :global(img) { transform: scale(1.04); }
+  /* Studio render: frame is the render's own pure white, so the image has no visible edge */
   .frame.studio {
-    background: radial-gradient(ellipse at 50% 60%, #ffffff 0%, #e6e6e9 100%);
+    background: #ffffff;
   }
   .frame.studio :global(img) {
     object-fit: contain;
-    padding: 6%;
+    padding: 2%;
   }
+  .frame.studio:hover :global(img) { transform: scale(1.03); }
   .frame::after {
     content: '';
     position: absolute;
