@@ -1,0 +1,196 @@
+---
+import { existsSync } from 'node:fs';
+import { Picture } from 'astro:assets';
+import poster from '../assets/home/front-detail.jpg';
+
+// The video loop is optional: it only renders once the encoded files exist in public/video/.
+const hasVideo = existsSync('public/video/hero-1080.mp4');
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<section class="hero" aria-label="BMW 330d Touring">
+  <div class="media">
+    <Picture
+      src={poster}
+      alt="Front of the Alpine White 330d Touring: kidney grille and laser headlight"
+      widths={[640, 1024, 1440, 2000]}
+      sizes="100vw"
+      formats={['avif', 'webp']}
+      loading="eager"
+      fetchpriority="high"
+      class="poster"
+    />
+    {hasVideo && (
+      <video
+        class="video"
+        muted
+        loop
+        playsinline
+        preload="none"
+        aria-hidden="true"
+        data-hero-video
+        data-sources={JSON.stringify({
+          '720': [`${base}/video/hero-720.webm`, `${base}/video/hero-720.mp4`],
+          '1080': [`${base}/video/hero-1080.webm`, `${base}/video/hero-1080.mp4`],
+        })}
+      />
+    )}
+    <div class="shade" aria-hidden="true"></div>
+  </div>
+
+  <div class="container content">
+    <p class="eyebrow">2024 · G21 LCI · M Sport</p>
+    <h1>
+      <span class="line">The 3</span>
+      <span class="line outline">Touring</span>
+    </h1>
+    <div class="meta">
+      <span class="m-stripe" aria-hidden="true"><span></span><span></span><span></span></span>
+      <p>330d · Alpine White · Rear-wheel drive</p>
+    </div>
+  </div>
+
+  <a class="scroll-cue" href="#stats" aria-label="Scroll to content">
+    <span></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 100svh;
+    min-height: 560px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  .media :global(.poster),
+  .video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .media :global(.poster) {
+    object-position: 60% 50%;
+    animation: hero-zoom 14s var(--ease) both;
+  }
+  .video {
+    opacity: 0;
+    transition: opacity 1.2s var(--ease);
+  }
+  .video.is-playing { opacity: 1; }
+  .shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgb(11 11 13 / 0.55) 0%, rgb(11 11 13 / 0) 28%),
+      linear-gradient(0deg, var(--bg) 0%, rgb(11 11 13 / 0.6) 32%, rgb(11 11 13 / 0) 62%),
+      linear-gradient(90deg, rgb(11 11 13 / 0.55) 0%, rgb(11 11 13 / 0) 55%);
+  }
+
+  .content {
+    padding-bottom: clamp(72px, 12vh, 140px);
+  }
+  h1 {
+    font-size: clamp(4.5rem, 16vw, 13rem);
+    margin-block: 12px 28px;
+  }
+  .line {
+    display: block;
+    animation: rise 1.1s var(--ease) both;
+  }
+  .line:nth-child(2) { animation-delay: 0.12s; }
+  .outline {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--alpine-white);
+  }
+  .eyebrow { animation: rise 1s var(--ease) 0.05s both; color: var(--text); }
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    animation: rise 1s var(--ease) 0.3s both;
+  }
+  .meta p {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    width: 26px;
+    height: 42px;
+    margin-left: -13px;
+    border: 2px solid rgb(255 255 255 / 0.5);
+    border-radius: 14px;
+  }
+  .scroll-cue span {
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    width: 4px;
+    height: 8px;
+    margin-left: -2px;
+    border-radius: 2px;
+    background: #fff;
+    animation: cue 1.8s ease-in-out infinite;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes hero-zoom {
+    from { transform: scale(1.08); }
+    to { transform: scale(1); }
+  }
+  @keyframes cue {
+    0% { opacity: 0; transform: translateY(0); }
+    40% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(14px); }
+  }
+
+  @media (max-width: 760px) {
+    .outline { -webkit-text-stroke-width: 1.5px; }
+    .scroll-cue { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .line, .eyebrow, .meta, .media :global(.poster), .scroll-cue span { animation: none; }
+  }
+</style>
+
+<script>
+  // Load the background loop only when it makes sense: not for reduced-motion
+  // or data-saver users. Mobile gets the 720p encode.
+  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+  const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (video && !reduce && !conn?.saveData) {
+    const res = window.innerWidth * window.devicePixelRatio > 1600 ? '1080' : '720';
+    const sources: Record<string, string[]> = JSON.parse(video.dataset.sources!);
+    for (const src of sources[res]) {
+      const s = document.createElement('source');
+      s.src = src;
+      s.type = src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+      video.append(s);
+    }
+    video.addEventListener('playing', () => video.classList.add('is-playing'), { once: true });
+    video.load();
+    video.play().catch(() => {});
+  }
+</script>

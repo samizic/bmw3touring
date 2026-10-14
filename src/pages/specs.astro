@@ -1,0 +1,303 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Blueprint from '../components/Blueprint.astro';
+import { groups, highlights, source } from '../data/specs';
+import heroImage from '../assets/home/rear-330d.jpg';
+---
+
+<Base
+  title="Technical specs"
+  description="Full technical specifications of the 2024 BMW 330d Touring (G21 LCI): B57 engine, 8-speed ZF, performance, dimensions, weights and capacities."
+>
+  <PageHero
+    eyebrow="330d Touring · G21 LCI"
+    title="Technical specs"
+    image={heroImage}
+    alt="Rear of the 330d Touring with the 330d badge"
+    focus="30% 50%"
+  />
+
+  <section class="highlights" aria-label="Key figures">
+    <div class="container grid">
+      {highlights.map((h, i) => (
+        <div class="hl" data-reveal style={`transition-delay:${i * 70}ms`}>
+          <p class="value">{h.value}<span class="unit">{h.unit}</span></p>
+          <p class="label">{h.label}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="container drawing" aria-labelledby="drawing-title">
+    <header data-reveal>
+      <p class="eyebrow">Exterior dimensions</p>
+      <h2 id="drawing-title">The blueprint</h2>
+    </header>
+    <Blueprint />
+  </section>
+
+  <div class="container layout">
+    <nav class="toc" aria-label="Spec sections">
+      <ol>
+        {groups.map((g, i) => (
+          <li>
+            <a href={`#${g.id}`} data-toc={g.id}>
+              <span class="num">{String(i + 1).padStart(2, '0')}</span>{g.title}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+
+    <div class="groups">
+      {groups.map((g, i) => (
+        <section id={g.id} class="group" aria-labelledby={`${g.id}-title`} data-reveal>
+          <header>
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <h2 id={`${g.id}-title`}>{g.title}</h2>
+            {g.intro && <p class="intro">{g.intro}</p>}
+          </header>
+          <dl>
+            {g.rows.map((r) => (
+              <div class="row">
+                <dt>{r.label}</dt>
+                <dd>
+                  {r.value}
+                  {r.note && <small>{r.note}</small>}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))}
+
+      <p class="source">
+        Factory data: <a href={source.url} rel="noopener" target="_blank">{source.name}</a>.
+        Figures are for the European-market 330d Touring RWD (July 2022 – May 2024).
+      </p>
+    </div>
+  </div>
+</Base>
+
+<style>
+  /* Headline figures */
+  .highlights {
+    border-block: 1px solid var(--line);
+    background: var(--bg-raised);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .hl {
+    padding: clamp(24px, 3vw, 40px) clamp(12px, 2vw, 28px);
+    border-left: 1px solid var(--line);
+  }
+  .hl:first-child { border-left: 0; padding-left: 0; }
+  .value {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2.5rem, 4.6vw, 4.25rem);
+    line-height: 1;
+    color: var(--alpine-white);
+  }
+  .unit {
+    margin-left: 6px;
+    font-size: 0.38em;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--m-light-blue);
+  }
+  .label {
+    margin: 8px 0 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* Blueprint */
+  .drawing { padding-top: clamp(56px, 8vw, 112px); }
+  .drawing header { margin-bottom: 28px; }
+  .drawing h2 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    margin-top: 10px;
+  }
+
+  /* Layout: sticky section index + groups */
+  .layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: clamp(32px, 5vw, 80px);
+    padding-block: clamp(56px, 8vw, 112px);
+  }
+  .toc {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+    align-self: start;
+  }
+  .toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid var(--line);
+  }
+  .toc a {
+    display: flex;
+    gap: 12px;
+    padding: 9px 0 9px 18px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.25s, border-color 0.25s;
+  }
+  .toc a:hover { color: var(--text); }
+  .toc a.is-active {
+    color: var(--text);
+    border-left-color: var(--m-light-blue);
+  }
+  .num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--m-light-blue);
+  }
+
+  /* Masonry-style flow: cards keep their natural height */
+  .groups {
+    columns: 2;
+    column-gap: 16px;
+  }
+  .group {
+    break-inside: avoid;
+    margin-bottom: 16px;
+    background: var(--bg-raised);
+    padding: clamp(24px, 3vw, 40px);
+    scroll-margin-top: calc(var(--header-h) + 24px);
+  }
+  .group header { margin-bottom: 20px; }
+  .group .num { font-size: 0.95rem; letter-spacing: 0.1em; }
+  h2 {
+    font-size: clamp(1.75rem, 2.6vw, 2.4rem);
+    margin-top: 6px;
+  }
+  .intro {
+    margin: 10px 0 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  dl { margin: 0; }
+  .row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 16px;
+    padding-block: 12px;
+    border-top: 1px solid var(--line);
+  }
+  dt {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding-top: 2px;
+  }
+  dd {
+    margin: 0;
+    font-weight: 400;
+    color: var(--text);
+  }
+  dd small {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.85rem;
+    font-weight: 300;
+    color: var(--text-muted);
+  }
+  .source {
+    column-span: all;
+    margin: 16px 0 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .source a { color: var(--text); }
+
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+    .hl:nth-child(4) { border-left: 0; padding-left: 0; }
+    .hl:nth-child(n + 4) { border-top: 1px solid var(--line); }
+    .groups { columns: 1; }
+  }
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; padding-top: 0; }
+    /* Index becomes a horizontally scrolling chip bar under the header */
+    .toc {
+      top: var(--header-h);
+      z-index: 10;
+      margin-inline: calc(var(--gutter) * -1);
+      padding: 12px var(--gutter);
+      background: rgb(11 11 13 / 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .toc::-webkit-scrollbar { display: none; }
+    .toc ol { display: flex; gap: 8px; border: 0; }
+    .toc a {
+      white-space: nowrap;
+      padding: 6px 14px;
+      margin: 0;
+      border: 1px solid var(--line);
+      font-size: 0.8rem;
+    }
+    .toc a .num { display: none; }
+    .toc a.is-active { border-color: var(--m-light-blue); background: rgb(22 160 224 / 0.12); }
+    .group { scroll-margin-top: calc(var(--header-h) + 72px); }
+  }
+  @media (max-width: 560px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .hl { border-left: 0; padding-left: 0; }
+    .hl:nth-child(even) { border-left: 1px solid var(--line); padding-left: 16px; }
+    .hl:nth-child(n + 3) { border-top: 1px solid var(--line); }
+    .hl:last-child { grid-column: 1 / -1; }
+    .row { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>
+
+<script>
+  // Highlight the section currently in view in the index
+  const toc = document.querySelector<HTMLElement>('.toc')!;
+  const links = new Map(
+    [...document.querySelectorAll<HTMLAnchorElement>('[data-toc]')].map((a) => [a.dataset.toc!, a]),
+  );
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        links.forEach((a) => a.classList.remove('is-active'));
+        const a = links.get(e.target.id);
+        if (!a) continue;
+        a.classList.add('is-active');
+        // On mobile the index is a horizontal chip bar: keep the active chip in view
+        if (toc.scrollWidth > toc.clientWidth) {
+          toc.scrollTo({ left: a.offsetLeft - toc.clientWidth / 2 + a.offsetWidth / 2, behavior: 'smooth' });
+        }
+      }
+    },
+    { rootMargin: '-35% 0px -60% 0px' },
+  );
+  document.querySelectorAll('.group').forEach((s) => io.observe(s));
+</script>

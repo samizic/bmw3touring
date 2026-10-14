@@ -1,0 +1,256 @@
+---
+// Four-view technical drawing of the G21 Touring LCI in the site's blueprint style.
+// Linework: Dimensions.com (adapted, see caption). Generated into src/data/blueprint-g21.ts
+// by scripts/build-blueprint.mjs. Coordinates below are in the source drawing's units.
+// Dimension values come from src/data/specs.ts.
+import { dimensions as D } from '../data/specs';
+import { linework as L } from '../data/blueprint-g21';
+
+const fmt = (n: number) => n.toLocaleString('en-GB');
+const SOURCE_URL = 'https://www.dimensions.com/element/bmw-3-series-touring-g21-7th-gen';
+
+// Geometry of the source drawing (units)
+const SIDE = { tail: 59.85, nose: 644.3, rearAxle: 195.1, frontAxle: 545.7, axleY: 218.4, ground: 260.38, top: 76.85 };
+const FRONT = { cx: 815, ground: 260.38, top: 80.83, half: 129.15 }; // half = mirror to mirror / 2
+const PLAN = { tail: 59.85, nose: 644.38, cy: 465.4 };
+const REAR = { cx: 815, ground: 530.6, top: 349.84, half: 129.15 };
+// Scale lateral factory figures against the mirror-to-mirror width
+const lat = (mm: number) => (mm / D.widthMirrors) * FRONT.half * 2;
+const planHalfW = ((PLAN.nose - PLAN.tail) / D.length) * D.width / 2;
+
+type Dim = { x1: number; y1: number; x2: number; y2: number; label: string; sub?: string; small?: boolean };
+type Ext = [number, number, number, number];
+
+const views = [
+  {
+    id: 'side', title: 'A · Side elevation', box: [10, 40, 650, 290], lw: L.side,
+    desc: `Side view: length ${fmt(D.length)} mm, wheelbase ${fmt(D.wheelbase)} mm, height ${fmt(D.height)} mm`,
+    ground: [20, 652],
+    dims: [
+      { x1: SIDE.tail, y1: 278, x2: SIDE.rearAxle, y2: 278, label: fmt(D.overhangRear), small: true },
+      { x1: SIDE.rearAxle, y1: 278, x2: SIDE.frontAxle, y2: 278, label: fmt(D.wheelbase), sub: 'Wheelbase' },
+      { x1: SIDE.frontAxle, y1: 278, x2: SIDE.nose, y2: 278, label: fmt(D.length - D.wheelbase - D.overhangRear), small: true },
+      { x1: SIDE.tail, y1: 308, x2: SIDE.nose, y2: 308, label: fmt(D.length), sub: 'Length' },
+      { x1: 36, y1: SIDE.ground, x2: 36, y2: SIDE.top, label: fmt(D.height), sub: 'Height' },
+    ] as Dim[],
+    exts: [
+      [SIDE.tail, 246, SIDE.tail, 312], [SIDE.nose, 236, SIDE.nose, 312],
+      [SIDE.rearAxle, SIDE.axleY, SIDE.rearAxle, 282], [SIDE.frontAxle, SIDE.axleY, SIDE.frontAxle, 282],
+      [32, SIDE.top, 300, SIDE.top], [32, SIDE.ground, 58, SIDE.ground],
+    ] as Ext[],
+    centres: [[SIDE.rearAxle, SIDE.axleY], [SIDE.frontAxle, SIDE.axleY]],
+  },
+  {
+    id: 'front', title: 'C · Front', box: [660, 40, 330, 290], lw: L.front,
+    desc: `Front view: width ${fmt(D.width)} mm, ${fmt(D.widthMirrors)} mm incl. mirrors, track ${fmt(D.trackFront)} mm`,
+    ground: [670, 960],
+    dims: [
+      { x1: FRONT.cx - lat(D.trackFront) / 2, y1: 276, x2: FRONT.cx + lat(D.trackFront) / 2, y2: 276, label: fmt(D.trackFront), sub: 'Track' },
+      { x1: FRONT.cx - lat(D.width) / 2, y1: 304, x2: FRONT.cx + lat(D.width) / 2, y2: 304, label: fmt(D.width), sub: 'Width' },
+      { x1: FRONT.cx - FRONT.half, y1: 64, x2: FRONT.cx + FRONT.half, y2: 64, label: fmt(D.widthMirrors), sub: 'Incl. mirrors' },
+      { x1: 966, y1: FRONT.ground, x2: 966, y2: FRONT.top, label: fmt(D.height) },
+    ] as Dim[],
+    exts: [
+      [FRONT.cx - lat(D.trackFront) / 2, 248, FRONT.cx - lat(D.trackFront) / 2, 280], [FRONT.cx + lat(D.trackFront) / 2, 248, FRONT.cx + lat(D.trackFront) / 2, 280],
+      [FRONT.cx - lat(D.width) / 2, 225, FRONT.cx - lat(D.width) / 2, 308], [FRONT.cx + lat(D.width) / 2, 225, FRONT.cx + lat(D.width) / 2, 308],
+      [FRONT.cx - FRONT.half, 120, FRONT.cx - FRONT.half, 60], [FRONT.cx + FRONT.half, 120, FRONT.cx + FRONT.half, 60],
+      [880, FRONT.top, 970, FRONT.top], [944, FRONT.ground, 970, FRONT.ground],
+    ] as Ext[],
+    centres: [],
+  },
+  {
+    id: 'plan', title: 'B · Plan', box: [10, 310, 650, 340], lw: L.plan,
+    desc: `Top view: length ${fmt(D.length)} mm, width ${fmt(D.width)} mm`,
+    ground: null,
+    dims: [
+      { x1: PLAN.tail, y1: 622, x2: PLAN.nose, y2: 622, label: fmt(D.length), sub: 'Length' },
+      { x1: 36, y1: PLAN.cy + planHalfW, x2: 36, y2: PLAN.cy - planHalfW, label: fmt(D.width), sub: 'Width' },
+    ] as Dim[],
+    exts: [
+      [PLAN.tail, 500, PLAN.tail, 626], [PLAN.nose, 500, PLAN.nose, 626],
+      [32, PLAN.cy - planHalfW, 110, PLAN.cy - planHalfW], [32, PLAN.cy + planHalfW, 110, PLAN.cy + planHalfW],
+    ] as Ext[],
+    centres: [],
+    axis: true,
+  },
+  {
+    id: 'rear', title: 'D · Rear', box: [660, 310, 330, 340], lw: L.rear,
+    desc: `Rear view: width ${fmt(D.width)} mm, track ${fmt(D.trackRear)} mm, height ${fmt(D.height)} mm`,
+    ground: [670, 960],
+    dims: [
+      { x1: REAR.cx - lat(D.trackRear) / 2, y1: 546, x2: REAR.cx + lat(D.trackRear) / 2, y2: 546, label: fmt(D.trackRear), sub: 'Track' },
+      { x1: REAR.cx - lat(D.width) / 2, y1: 574, x2: REAR.cx + lat(D.width) / 2, y2: 574, label: fmt(D.width), sub: 'Width' },
+      { x1: 966, y1: REAR.ground, x2: 966, y2: REAR.top, label: fmt(D.height) },
+    ] as Dim[],
+    exts: [
+      [REAR.cx - lat(D.trackRear) / 2, 518, REAR.cx - lat(D.trackRear) / 2, 550], [REAR.cx + lat(D.trackRear) / 2, 518, REAR.cx + lat(D.trackRear) / 2, 550],
+      [REAR.cx - lat(D.width) / 2, 495, REAR.cx - lat(D.width) / 2, 578], [REAR.cx + lat(D.width) / 2, 495, REAR.cx + lat(D.width) / 2, 578],
+      [880, REAR.top, 970, REAR.top], [944, REAR.ground, 970, REAR.ground],
+    ] as Ext[],
+    centres: [],
+  },
+];
+const [side, front, plan, rear] = views;
+const rows = [[side, front], [plan, rear]];
+---
+
+<figure class="blueprint" aria-label="Dimensioned drawing of the BMW 330d Touring in side, front, top and rear view">
+  <div class="sheet">
+    {rows.map((row) => (
+      <div class="row" style={`grid-template-columns: ${row[0].box[2]}fr ${row[1].box[2]}fr`}>
+        {row.map((v) => (
+          <svg class={`view ${v.id}`} viewBox={v.box.join(' ')} role="img" aria-label={v.desc}>
+            <defs>
+              <marker id={`bp-arr-${v.id}`} viewBox="0 0 10 10" refX="10" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse" markerUnits="userSpaceOnUse">
+                <path d="M0 1.5 L10 5 L0 8.5 z" class="arrow" />
+              </marker>
+            </defs>
+            {v.ground && <line class="ground" x1={v.ground[0]} y1={v.id === 'rear' ? REAR.ground : SIDE.ground} x2={v.ground[1]} y2={v.id === 'rear' ? REAR.ground : SIDE.ground} />}
+            {v.axis && <line class="centre" x1={PLAN.tail - 15} y1={PLAN.cy} x2={PLAN.nose + 15} y2={PLAN.cy} />}
+            {(v.id === 'front' || v.id === 'rear') && (
+              <line class="centre" x1={FRONT.cx} y1={v.id === 'front' ? FRONT.top - 8 : REAR.top - 8} x2={FRONT.cx} y2={(v.id === 'front' ? FRONT.ground : REAR.ground) + 8} />
+            )}
+            <g class="lw-d" set:html={v.lw.d} />
+            <g class="lw-t" set:html={v.lw.t} />
+            <g class="lw-o" set:html={v.lw.o} />
+            {v.centres.map(([cx, cy]) => <path class="centre" d={`M${cx - 54} ${cy} H${cx + 54} M${cx} ${cy - 54} V${cy + 54}`} />)}
+            {v.exts.map(([x1, y1, x2, y2]) => <line class="ext" x1={x1} y1={y1} x2={x2} y2={y2} />)}
+            {v.dims.map((d) => {
+              const vertical = d.x1 === d.x2;
+              const mx = (d.x1 + d.x2) / 2, my = (d.y1 + d.y2) / 2;
+              const leftSide = vertical && d.x1 < 100;
+              const above = !vertical && d.y1 < 100;
+              return (
+                <g>
+                  <line class="dim" x1={d.x1} y1={d.y1} x2={d.x2} y2={d.y2} marker-start={`url(#bp-arr-${v.id})`} marker-end={`url(#bp-arr-${v.id})`} />
+                  {vertical ? (
+                    <text class="dim-label" transform={`translate(${d.x1 + (leftSide ? -6 : 13)} ${my}) rotate(-90)`} text-anchor="middle">
+                      {d.label}<tspan class="unit"> mm</tspan>{d.sub && <tspan class="sub"> {d.sub}</tspan>}
+                    </text>
+                  ) : (
+                    <text class:list={['dim-label', { small: d.small }]} x={mx} y={above ? my - 5 : my - 4} text-anchor="middle">
+                      {d.label}<tspan class="unit"> mm</tspan>{d.sub && <tspan class="sub"> {d.sub}</tspan>}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
+            <text class="view-label" x={v.box[0] + 10} y={v.box[1] + 12}>{v.title}</text>
+          </svg>
+        ))}
+      </div>
+    ))}
+
+    <div class="title-block" aria-hidden="true">
+      <span><b>BMW 330d Touring</b> G21 LCI</span>
+      <span>M Sport · 19″ Style 793</span>
+      <span>Dimensions in mm</span>
+      <span class="m-stripe"><span></span><span></span><span></span></span>
+    </div>
+  </div>
+  <figcaption>
+    Drawing adapted from <a href={SOURCE_URL} target="_blank" rel="noopener">Dimensions.com</a>
+    (restyled, dimensions replaced with BMW factory figures). Front overhang derived from length,
+    wheelbase and rear overhang. Wheels and exhaust details may differ from this car.
+  </figcaption>
+</figure>
+
+<style>
+  .blueprint { margin: 0; }
+  .sheet {
+    position: relative;
+    display: grid;
+    gap: clamp(4px, 1vw, 12px);
+    padding: clamp(14px, 3vw, 40px);
+    border: 1px solid #1e3550;
+    background-color: #08121f;
+    background-image:
+      linear-gradient(rgb(22 160 224 / 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(22 160 224 / 0.12) 1px, transparent 1px),
+      linear-gradient(rgb(22 160 224 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(22 160 224 / 0.05) 1px, transparent 1px);
+    background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position: -1px -1px;
+  }
+  .sheet::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgb(22 160 224 / 0.25);
+    pointer-events: none;
+  }
+  .row {
+    display: grid;
+    gap: clamp(4px, 2vw, 24px);
+    align-items: start;
+  }
+  .view {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  /* All linework keeps a constant on-screen stroke width */
+  .view :global(:is(path, line, polyline, polygon)) {
+    vector-effect: non-scaling-stroke;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .view :global(.lw-o > *) { stroke: #e6f6ff; stroke-width: 1.7; }
+  .view :global(.lw-o > path) { fill: rgb(22 160 224 / 0.07); }
+  .view :global(.lw-t > *) { stroke: #8fd3f5; stroke-width: 1; }
+  .view :global(.lw-d > *) { stroke: #5fa8d4; stroke-width: 0.8; }
+
+  .ground { stroke: #4b7aa0; stroke-width: 1; stroke-dasharray: 2 6; }
+  .centre { stroke: var(--m-red); stroke-width: 0.7; stroke-dasharray: 14 5 3 5; opacity: 0.85; }
+  .ext { stroke: #4b7aa0; stroke-width: 0.7; }
+  .dim { stroke: #ffffff; stroke-width: 1; }
+  .arrow { fill: #ffffff !important; stroke: none !important; }
+
+  text { fill: #ffffff; font-family: var(--font-display); }
+  .dim-label { font-size: 13px; font-weight: 700; letter-spacing: 0.2px; }
+  .dim-label.small { font-size: 11px; }
+  .unit { font-size: 8.5px; font-weight: 500; fill: #8fd3f5; }
+  .sub { font-size: 7.5px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; fill: #7fc4ea; }
+  .view-label { font-size: 9px; font-weight: 500; letter-spacing: 1.6px; text-transform: uppercase; fill: var(--m-light-blue); }
+
+  .title-block {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 8px;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #7fc4ea;
+  }
+  .title-block > span:not(.m-stripe) {
+    padding: 8px 16px;
+    border: 1px solid rgb(22 160 224 / 0.35);
+    margin-left: -1px;
+  }
+  .title-block b { color: #fff; font-weight: 700; }
+  .title-block .m-stripe { margin-left: 16px; }
+  figcaption {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  figcaption a { color: var(--text); }
+
+  @media (max-width: 760px) {
+    .row { grid-template-columns: 1fr !important; }
+    /* Wide views get small on phones: enlarge their text */
+    :is(.side, .plan) .dim-label { font-size: 18px; }
+    :is(.side, .plan) .dim-label.small { font-size: 15px; }
+    :is(.side, .plan) .unit { font-size: 11px; }
+    :is(.side, .plan) .sub { font-size: 9px; }
+    :is(.side, .plan) .view-label { font-size: 12px; }
+    .title-block { justify-content: flex-start; }
+  }
+</style>

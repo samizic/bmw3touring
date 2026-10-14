@@ -1,0 +1,185 @@
+---
+import { nav } from '../data/site';
+import { url } from '../lib/url';
+
+const current = Astro.url.pathname.replace(/\/$/, '');
+---
+
+<header class="site-header" data-header>
+  <div class="container bar">
+    <a class="brand" href={url()} aria-label="Home">
+      <span class="m-stripe" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="brand-text">330d <b>Touring</b></span>
+    </a>
+
+    <button class="menu-btn" aria-expanded="false" aria-controls="site-nav" data-menu-btn>
+      <span class="sr-only">Menu</span>
+      <span class="burger" aria-hidden="true"></span>
+    </button>
+
+    <nav id="site-nav" class="nav" data-nav>
+      <ul>
+        {nav.map((item) => {
+          const href = url(item.href);
+          const active = current === href.replace(/\/$/, '');
+          return (
+            <li>
+              {item.ready ? (
+                <a href={href} aria-current={active ? 'page' : undefined}>{item.label}</a>
+              ) : (
+                <span class="soon" aria-disabled="true">{item.label}<small>Soon</small></span>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    height: var(--header-h);
+    transition: background-color 0.4s var(--ease), backdrop-filter 0.4s var(--ease);
+  }
+  .site-header.is-scrolled {
+    background: rgb(11 11 13 / 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .bar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+  .brand-text {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.25rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .brand-text b { font-weight: 700; }
+
+  .nav ul {
+    display: flex;
+    gap: clamp(20px, 3vw, 44px);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav a,
+  .nav .soon {
+    position: relative;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.95rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding-block: 6px;
+  }
+  .nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--m-light-blue);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease);
+  }
+  .nav a:hover::after,
+  .nav a[aria-current='page']::after { transform: scaleX(1); }
+  .nav .soon {
+    color: var(--text-muted);
+    cursor: default;
+  }
+  .nav .soon small {
+    margin-left: 6px;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--m-red);
+    vertical-align: super;
+  }
+
+  .menu-btn {
+    display: none;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    background: none;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .burger,
+  .burger::before,
+  .burger::after {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+    margin-inline: auto;
+    transition: transform 0.3s var(--ease), opacity 0.3s;
+  }
+  .burger { position: relative; }
+  .burger::before,
+  .burger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+  .burger::before { top: -7px; }
+  .burger::after { top: 7px; }
+  .menu-btn[aria-expanded='true'] .burger { background: transparent; }
+  .menu-btn[aria-expanded='true'] .burger::before { transform: translateY(7px) rotate(45deg); }
+  .menu-btn[aria-expanded='true'] .burger::after { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 760px) {
+    .menu-btn { display: block; position: relative; z-index: 2; }
+    .nav {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: grid;
+      place-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s var(--ease), visibility 0.35s;
+    }
+    .nav.is-open { opacity: 1; visibility: visible; }
+    .nav ul { flex-direction: column; align-items: center; gap: 28px; }
+    .nav a,
+    .nav .soon { font-size: 2rem; letter-spacing: 0.1em; }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]')!;
+  const btn = document.querySelector<HTMLButtonElement>('[data-menu-btn]')!;
+  const nav = document.querySelector<HTMLElement>('[data-nav]')!;
+
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 24);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') !== 'true';
+    btn.setAttribute('aria-expanded', String(open));
+    nav.classList.toggle('is-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+</script>
