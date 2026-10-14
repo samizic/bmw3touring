@@ -7,7 +7,7 @@ import StatsBand from '../components/StatsBand.astro';
 import StoryPanel from '../components/StoryPanel.astro';
 import Teasers from '../components/Teasers.astro';
 
-import coast from '../assets/home/coast-cliffs-front.jpg';
+import coast from '../assets/home/coast-cliffs-flipped.jpg';
 import rear from '../assets/home/rear-330d.jpg';
 import render from '../assets/home/render-studio-lci.png';
 ---
@@ -70,7 +70,7 @@ import render from '../assets/home/render-studio-lci.png';
 <style>
   .banner {
     position: relative;
-    height: clamp(420px, 80vh, 860px);
+    height: clamp(480px, 95vh, 1040px);
     display: flex;
     align-items: flex-start;
     overflow: hidden;
@@ -84,7 +84,7 @@ import render from '../assets/home/render-studio-lci.png';
     height: 100%;
     object-fit: cover;
     /* framed low, so the car and winding road sit below the title */
-    object-position: 50% 40%;
+    object-position: 50% 58%;
   }
   .banner::after {
     content: '';
@@ -93,7 +93,7 @@ import render from '../assets/home/render-studio-lci.png';
     z-index: -1;
     background:
       linear-gradient(180deg, var(--bg) 0%, rgb(11 11 13 / 0) 30%),
-      linear-gradient(0deg, var(--bg) 0%, rgb(11 11 13 / 0) 22%);
+      linear-gradient(0deg, var(--bg) 0%, rgb(11 11 13 / 0) 12%);
   }
   .banner-copy { padding-top: clamp(52px, 8vh, 96px); }
   .banner h2 {
@@ -103,7 +103,7 @@ import render from '../assets/home/render-studio-lci.png';
   }
   .banner .eyebrow { color: var(--text); }
   @media (max-width: 760px) {
-    .banner :global(.banner-img) { object-position: 32% 50%; }
+    .banner :global(.banner-img) { object-position: 68% 50%; }
   }
 
   .stories {
