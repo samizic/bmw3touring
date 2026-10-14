@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+*.log
+.env
+# raw, uncompressed source media never goes in the repo
+media-src/
+
+# local tooling
+.claude/

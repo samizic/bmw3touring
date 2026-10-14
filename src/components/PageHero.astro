@@ -1,0 +1,85 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  image: ImageMetadata;
+  alt: string;
+  /** CSS object-position for the crop */
+  focus?: string;
+}
+
+const { eyebrow, title, image, alt, focus = '50% 50%' } = Astro.props;
+---
+
+<section class="page-hero">
+  <Picture
+    src={image}
+    alt={alt}
+    widths={[640, 1024, 1440, 2000]}
+    sizes="100vw"
+    formats={['avif', 'webp']}
+    loading="eager"
+    fetchpriority="high"
+    class="bg"
+    style={`object-position:${focus}`}
+  />
+  <div class="container content">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1>{title}</h1>
+    <span class="m-stripe" aria-hidden="true"><span></span><span></span><span></span></span>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    position: relative;
+    min-height: clamp(380px, 62vh, 640px);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .page-hero :global(.bg) {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: zoom 12s var(--ease) both;
+  }
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(180deg, rgb(11 11 13 / 0.6) 0%, rgb(11 11 13 / 0) 30%),
+      linear-gradient(0deg, var(--bg) 0%, rgb(11 11 13 / 0.55) 45%, rgb(11 11 13 / 0.1) 100%);
+  }
+  .content {
+    padding-top: calc(var(--header-h) + 48px);
+    padding-bottom: clamp(40px, 7vh, 72px);
+  }
+  .eyebrow { color: var(--text); }
+  h1 {
+    font-size: clamp(3.5rem, 11vw, 9rem);
+    margin-block: 10px 24px;
+    animation: rise 1s var(--ease) both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(32px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes zoom {
+    from { transform: scale(1.06); }
+    to { transform: scale(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    h1, .page-hero :global(.bg) { animation: none; }
+  }
+</style>

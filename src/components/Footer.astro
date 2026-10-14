@@ -1,0 +1,38 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container inner">
+    <span class="m-stripe" aria-hidden="true"><span></span><span></span><span></span></span>
+    <p>
+      BMW 330d Touring · G21 LCI · Alpine White · M Sport
+    </p>
+    <p class="fine">
+      © {year} · A private enthusiast site, not affiliated with BMW AG. BMW and M are trademarks of BMW AG.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding-block: 56px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  .inner {
+    display: grid;
+    gap: 14px;
+    justify-items: start;
+  }
+  p { margin: 0; }
+  p:first-of-type {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .fine { font-size: 0.8rem; }
+</style>

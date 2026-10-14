@@ -1,0 +1,62 @@
+---
+import { stats } from '../data/site';
+---
+
+<section id="stats" class="stats" aria-label="Key figures">
+  <div class="container grid">
+    {stats.map((s, i) => (
+      <div class="stat" data-reveal style={`transition-delay:${i * 90}ms`}>
+        <p class="value">
+          {s.value}
+          {s.unit && <span class="unit">{s.unit}</span>}
+        </p>
+        <p class="label">{s.label}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .stats {
+    padding-block: clamp(56px, 9vw, 112px);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat {
+    padding: 8px clamp(16px, 2.5vw, 36px);
+    border-left: 1px solid var(--line);
+  }
+  .stat:first-child { border-left: 0; padding-left: 0; }
+  .value {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(3.25rem, 7vw, 6rem);
+    line-height: 1;
+    color: var(--alpine-white);
+  }
+  .unit {
+    margin-left: 6px;
+    font-size: 0.36em;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--m-light-blue);
+  }
+  .label {
+    margin: 10px 0 0;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 860px) {
+    .grid { grid-template-columns: repeat(2, 1fr); row-gap: 40px; }
+    .stat:nth-child(odd) { border-left: 0; padding-left: 0; }
+  }
+</style>

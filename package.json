@@ -1,0 +1,20 @@
+{
+  "name": "bmw3touring",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "strip-gps": "scripts/strip-gps.sh",
+    "check-gps": "scripts/strip-gps.sh --check"
+  },
+  "dependencies": {
+    "@fontsource/barlow": "5.1.0",
+    "@fontsource/barlow-condensed": "5.1.0",
+    "astro": "5.7.10",
+    "sharp": "0.33.5"
+  }
+}

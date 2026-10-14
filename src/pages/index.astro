@@ -1,0 +1,107 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import StatsBand from '../components/StatsBand.astro';
+import StoryPanel from '../components/StoryPanel.astro';
+import Teasers from '../components/Teasers.astro';
+
+import coast from '../assets/home/coast-seaside.jpg';
+import rear from '../assets/home/rear-330d.jpg';
+import render from '../assets/home/render-studio.png';
+---
+
+<Base title="BMW 330d Touring · G21">
+  <Hero />
+  <StatsBand />
+
+  <section class="banner" aria-label="On the Adriatic coast">
+    <Picture
+      src={coast}
+      alt="The 330d Touring parked on a coastal road above a calm Adriatic sea"
+      widths={[640, 1024, 1440, 2000]}
+      sizes="100vw"
+      formats={['avif', 'webp']}
+      loading="lazy"
+      decoding="async"
+      class="banner-img"
+    />
+    <div class="banner-copy container" data-reveal>
+      <p class="eyebrow">Home roads</p>
+      <h2>Built for<br />the long way round</h2>
+    </div>
+  </section>
+
+  <section class="stories container">
+    <StoryPanel
+      image={rear}
+      alt="Rear three-quarter detail with the 330d badge and L-shaped tail light"
+      eyebrow="Inline-six diesel"
+      title="Six cylinders. One badge."
+      focus="30% 50%"
+    >
+      <p>
+        Three litres, twin-stage turbocharging and a 48 V mild-hybrid assist. Effortless torque from
+        just off idle, and a long-legged cruiser that still returns diesel economy.
+      </p>
+    </StoryPanel>
+
+    <StoryPanel
+      image={render}
+      alt="Studio render of the G21 330d Touring in Alpine White with M Sport package"
+      eyebrow="As specified"
+      title="Alpine White, M Sport"
+      studio
+      reverse
+    >
+      <p>
+        G21 LCI Touring with the M Sport package: sharper bumpers, M aerodynamics, sport seats and
+        the M leather steering wheel. Rear-wheel drive, the way a 3 Series should be.
+      </p>
+    </StoryPanel>
+  </section>
+
+  <Teasers />
+</Base>
+
+<style>
+  .banner {
+    position: relative;
+    height: clamp(420px, 80vh, 860px);
+    display: flex;
+    align-items: flex-start;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .banner :global(.banner-img) {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 60% 60%;
+  }
+  .banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(180deg, var(--bg) 0%, rgb(11 11 13 / 0) 30%),
+      linear-gradient(0deg, var(--bg) 0%, rgb(11 11 13 / 0) 22%);
+  }
+  .banner-copy { padding-top: clamp(72px, 12vh, 140px); }
+  .banner h2 {
+    font-size: clamp(2.75rem, 7vw, 6.5rem);
+    margin-top: 12px;
+    text-shadow: 0 2px 30px rgb(0 0 0 / 0.25);
+  }
+  .banner .eyebrow { color: var(--text); }
+
+  .stories {
+    display: grid;
+    gap: clamp(80px, 12vw, 160px);
+    padding-top: clamp(80px, 12vw, 160px);
+  }
+</style>
