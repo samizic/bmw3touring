@@ -9,12 +9,14 @@ interface Props {
   alt: string;
   /** CSS object-position for the crop */
   focus?: string;
+  /** Put the title on the right, e.g. when the car sits on the left of the photo */
+  align?: 'left' | 'right';
 }
 
-const { eyebrow, title, image, alt, focus = '50% 50%' } = Astro.props;
+const { eyebrow, title, image, alt, focus = '50% 50%', align = 'left' } = Astro.props;
 ---
 
-<section class="page-hero">
+<section class:list={['page-hero', { right: align === 'right' }]}>
   <Picture
     src={image}
     alt={alt}
@@ -64,6 +66,18 @@ const { eyebrow, title, image, alt, focus = '50% 50%' } = Astro.props;
   .content {
     padding-top: calc(var(--header-h) + 48px);
     padding-bottom: clamp(40px, 7vh, 72px);
+  }
+  .right .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .right::after {
+    background:
+      linear-gradient(180deg, rgb(11 11 13 / 0.6) 0%, rgb(11 11 13 / 0) 30%),
+      linear-gradient(270deg, rgb(11 11 13 / 0.55) 0%, rgb(11 11 13 / 0) 55%),
+      linear-gradient(0deg, var(--bg) 0%, rgb(11 11 13 / 0.35) 35%, rgb(11 11 13 / 0) 70%);
   }
   .eyebrow { color: var(--text); }
   h1 {

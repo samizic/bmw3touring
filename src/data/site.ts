@@ -2,8 +2,8 @@
 export const nav = [
   { label: 'Home', href: '', ready: true },
   { label: 'Specs', href: 'specs', ready: true },
-  { label: 'Gallery', href: 'gallery', ready: false },
-  { label: 'Maintenance', href: 'maintenance', ready: true },
+  { label: 'Gallery', href: 'gallery', ready: true },
+  { label: 'DIY & Service', href: 'diy-service', ready: true },
 ];
 
 // Headline numbers for the homepage stats band.

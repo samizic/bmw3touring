@@ -146,9 +146,11 @@ export const groups: SpecGroup[] = [
     rows: [
       { label: 'Front brakes', value: 'Ventilated discs' },
       { label: 'Rear brakes', value: 'Ventilated discs' },
-      { label: 'Wheels', value: 'BMW Individual Style 793', note: '19″ staggered set' },
-      { label: 'Front tyres', value: '225/40 R19' },
-      { label: 'Rear tyres', value: '255/35 R19' },
+      { label: 'Summer wheels', value: 'BMW Individual Style 793', note: '19″ staggered set' },
+      { label: 'Summer tyres, front', value: '225/40 R19' },
+      { label: 'Summer tyres, rear', value: '255/35 R19' },
+      { label: 'Winter wheels', value: 'BMW Style 780', note: '18″ square set' },
+      { label: 'Winter tyres', value: '225/45 R18', note: 'Michelin Pilot Alpin 5, all four' },
     ],
   },
   {

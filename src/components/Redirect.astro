@@ -1,0 +1,24 @@
+---
+// Static redirect page for moved URLs (GitHub Pages has no server-side redirects).
+import { url } from '../lib/url';
+
+interface Props {
+  to: string;
+}
+
+const target = url(Astro.props.to);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Moved</title>
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={new URL(target, Astro.site).href} />
+    <meta name="robots" content="noindex" />
+  </head>
+  <body>
+    <p>This page has moved to <a href={target}>{target}</a>.</p>
+  </body>
+</html>
