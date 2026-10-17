@@ -16,13 +16,14 @@ captions:
   04-front-bumper-on-lift.jpg: Front bumper on the lift. The film wraps into the air intakes.
   05-headlight-and-bonnet.jpg: Headlight and bonnet edge, both under film.
   06-front-corner.jpg: Front corner, bumper and wing.
-  07-ppf-edge-front-wing.jpg: Film edge where the front wing meets the door.
-  08-ppf-edge-door.jpg: Door and wing gap. Ceramic coating continues where the film stops.
-  09-ppf-edge-roof-pillar.jpg: Film edge on the roof above the A-pillar.
-  10-pillar-trim-gloss.jpg: Gloss black pillar trim after coating.
-  11-pillar-trim-rear-door.jpg: Rear door and pillar trim.
-  12-rear-quarter-gloss.jpg: Rear quarter. Coated paint showing the reflections.
-  13-rear-bumper.jpg: Rear bumper and diffuser.
+  07-ppf-edge-front-bumper.jpg: Film edge on the front bumper, next to the air intake.
+  08-ppf-edge-front-wing.jpg: Film edge where the front wing meets the door.
+  09-ppf-edge-door.jpg: Door and wing gap. Ceramic coating continues where the film stops.
+  10-ppf-edge-roof-pillar.jpg: Film edge on the roof above the A-pillar.
+  11-pillar-trim-gloss.jpg: Gloss black pillar trim after coating.
+  12-pillar-trim-rear-door.jpg: Rear door and pillar trim.
+  13-rear-quarter-gloss.jpg: Rear quarter. Coated paint showing the reflections.
+  14-rear-bumper.jpg: Rear bumper and diffuser.
 ---
 
 Within days of collecting the car it went to a **Gyeon Certified Detailer** for a full protection
