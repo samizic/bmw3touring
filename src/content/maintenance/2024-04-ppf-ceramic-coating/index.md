@@ -2,7 +2,7 @@
 title: PPF & ceramic coating
 date: 2024-04-03
 category: Detailing
-summary: Full new-car detail at a Gyeon Certified Detailer. Gyeon paint protection film on the front end and side skirts, with ceramic coating over the whole car.
+summary: Full new-car detail at a Gyeon Certified Detailer. Gyeon paint protection film on the front end, side skirts and parts of the rear bumper, with ceramic coating over the whole car.
 cover: ./photos/01-finished-front-three-quarter.jpg
 coverAlt: The freshly coated 330d Touring in the detailing studio
 performedBy: Gyeon Certified Detailer
@@ -22,8 +22,8 @@ captions:
   10-pillar-trim-gloss.jpg: Gloss black pillar trim, wrapped in PPF.
   11-pillar-trim-rear-door.jpg: Rear door and pillar trim.
   12-rear-quarter-gloss.jpg: Rear quarter. Coated paint showing the reflections.
-  13-rear-bumper.jpg: Rear bumper and diffuser.
-  14-rear-bumper-detail.jpg: Rear bumper, next to the side vent.
+  13-rear-bumper.jpg: Rear bumper below the boot lid. A PPF strip on top protects the paint when loading the boot.
+  14-rear-bumper-detail.jpg: Film edge on the rear bumper. A small PPF strip behind the rear wheel catches stones thrown up by the tyre.
 ---
 
 Within days of collecting the car it went to a **Gyeon Certified Detailer** for a full protection
@@ -41,6 +41,9 @@ Gyeon PPF went on the areas that face the road. The green areas on the map below
 - **Mirror caps**
 - **A-pillars** and the **front edge of the roof**
 - **Gloss black door pillar trims**
+- Two areas of the **rear bumper**:
+  - a strip along the top, below the boot lid, to protect the paint when loading and unloading
+  - a small strip low down behind each rear wheel, against dirt and stones thrown up by the tyres
 - **Side skirts**, the full length of both sides
 
 ![Map of the PPF coverage: front bumper, bonnet, front wings, headlights, mirrors, A-pillars, roof edge and side skirts highlighted in green](./ppf-coverage-map.jpg)
