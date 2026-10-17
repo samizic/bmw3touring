@@ -18,7 +18,9 @@ captions:
   07-rear-wheel.jpg: Rear wheel. The same size front and rear.
   08-front-three-quarter.jpg: Front three-quarter in the garage.
   09-new-set.jpg: The new set, ready to go on.
-  10-old-and-new-wheels.jpg: New 18″ Style 780 winter wheel next to the 19″ Style 793 summer wheel.
+  10-style-780-wheel.jpg: One of the new 18″ Style 780 wheels on a Michelin Pilot Alpin 5.
+  11-pilot-alpin-5-tread.jpg: Pilot Alpin 5 tread, next to the 225/40 R19 summer tyre.
+  12-old-and-new-wheels.jpg: New 18″ Style 780 winter wheel next to the 19″ Style 793 summer wheel.
 ---
 
 The 19″ summer wheels with their low-profile tyres aren't made for snow, so the car got a
