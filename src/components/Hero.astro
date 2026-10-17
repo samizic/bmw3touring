@@ -152,6 +152,16 @@ import poster from '../assets/gallery/pxl_20240217_124148987_wheels.jpg';
     .hero { --hero-w: 100%; }
     .media :global(.poster) { object-position: 78% 62%; }
   }
+  /* Portrait phones: the photo fills only the top part of the screen, so the whole car fits.
+     It fades into the background and the title sits below the car. */
+  @media (max-aspect-ratio: 1/1) {
+    .media :global(.poster) {
+      height: 62%;
+      object-position: 76% 50%;
+      -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+      mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+    }
+  }
   @media (max-width: 760px) {
     .outline { -webkit-text-stroke-width: 1.5px; }
     .scroll-cue { display: none; }
