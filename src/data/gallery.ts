@@ -45,7 +45,7 @@ export const chapters: GalleryChapter[] = [
     when: 'April 2024',
     photos: [
       { file: 'img-20240403-wa0023.jpg', caption: 'PPF and ceramic coating done, ready for collection' },
-      { file: 'img-20240403-wa0025.jpg', caption: 'Bonnet, kidneys and laser lights under the studio lights' },
+      { file: 'img-20240403-wa0025.jpg', caption: 'Bonnet, kidneys and adaptive LED headlights under the studio lights' },
     ],
   },
   {
@@ -64,7 +64,7 @@ export const chapters: GalleryChapter[] = [
     photos: [
       { file: 'pxl_20251210_145538384-v3.jpg', caption: 'Fuel stop on a wet December afternoon' },
       { file: 'pxl_20251210_185505934-v2.jpg', caption: '19″ Style 793 wheel' },
-      { file: 'pxl_20251210_185550847-v3.jpg', caption: 'Laser light and M Sport front bumper' },
+      { file: 'pxl_20251210_185550847-v3.jpg', caption: 'Adaptive LED headlight and M Sport front bumper' },
       { file: 'pxl_20260111_120155606.jpg', caption: 'Ski trip: roof box on, snowy peaks behind' },
       { file: 'pxl_20260129_070223115-v3.jpg', caption: 'Frosty morning at the pump' },
     ],

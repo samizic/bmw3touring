@@ -10,7 +10,7 @@ products:
   - 4 × Michelin Pilot Alpin 5, 225/45 R18 95V XL
 captions:
   01-pilot-alpin-5-close-up.jpg: Michelin Pilot Alpin 5, 225/45 R18 95V.
-  02-front-wheel-and-headlight.jpg: Front wheel and laser light.
+  02-front-wheel-and-headlight.jpg: Front wheel and adaptive LED headlight.
   03-ski-trip-rear.jpg: Snow-covered car park in the Alps.
   04-ski-trip-side.jpg: Ski trip, roof box on.
   05-fuel-stop.jpg: On the road, December.
