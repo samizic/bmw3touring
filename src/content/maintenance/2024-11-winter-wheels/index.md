@@ -10,7 +10,7 @@ products:
   - 4 × Michelin Pilot Alpin 5, 225/45 R18 95V XL
 captions:
   01-pilot-alpin-5-close-up.jpg: Michelin Pilot Alpin 5, 225/45 R18 95V.
-  02-front-wheel-and-headlight.jpg: Front wheel and laser light.
+  02-front-wheel-and-headlight.jpg: Front wheel and adaptive LED headlight.
   03-ski-trip-rear.jpg: Snow-covered car park in the Alps.
   04-ski-trip-side.jpg: Ski trip, roof box on.
   05-fuel-stop.jpg: On the road, December.
@@ -18,7 +18,9 @@ captions:
   07-rear-wheel.jpg: Rear wheel. The same size front and rear.
   08-front-three-quarter.jpg: Front three-quarter in the garage.
   09-new-set.jpg: The new set, ready to go on.
-  10-old-and-new-wheels.jpg: New 18″ Style 780 winter wheel next to the 19″ Style 793 summer wheel.
+  10-style-780-wheel.jpg: One of the new 18″ Style 780 wheels on a Michelin Pilot Alpin 5.
+  11-pilot-alpin-5-tread.jpg: Pilot Alpin 5 tread, next to the 225/40 R19 summer tyre.
+  12-old-and-new-wheels.jpg: New 18″ Style 780 winter wheel next to the 19″ Style 793 summer wheel.
 ---
 
 The 19″ summer wheels with their low-profile tyres aren't made for snow, so the car got a

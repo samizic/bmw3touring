@@ -2,7 +2,7 @@
 title: PPF & ceramic coating
 date: 2024-04-03
 category: Detailing
-summary: Full new-car detail at a Gyeon Certified Detailer. Gyeon paint protection film on the front end and side skirts, with ceramic coating over the whole car.
+summary: Full new-car detail at a Gyeon Certified Detailer. Gyeon paint protection film on the front end, side skirts and parts of the rear bumper, with ceramic coating over the whole car.
 cover: ./photos/01-finished-front-three-quarter.jpg
 coverAlt: The freshly coated 330d Touring in the detailing studio
 performedBy: Gyeon Certified Detailer
@@ -11,19 +11,19 @@ products:
   - Gyeon ceramic coating
 captions:
   01-finished-front-three-quarter.jpg: Finished. Coating cured and the car ready for collection.
-  02-front-detail.jpg: Bonnet, kidney grille and laser lights under the studio lights.
+  02-front-detail.jpg: Bonnet, kidney grille and adaptive LED headlights under the studio lights.
   03-front-three-quarter-wheel-covers.jpg: Front end wrapped in film, wheels covered during the work.
   04-front-bumper-on-lift.jpg: Front bumper on the lift. The film wraps into the air intakes.
   05-headlight-and-bonnet.jpg: Headlight and bonnet edge, both under film.
   06-front-corner.jpg: Front corner, bumper and wing.
-  07-ppf-edge-front-bumper.jpg: Film edge on the front bumper, next to the air intake.
-  08-ppf-edge-front-wing.jpg: Film edge where the front wing meets the door.
-  09-ppf-edge-door.jpg: Door and wing gap. Ceramic coating continues where the film stops.
-  10-ppf-edge-roof-pillar.jpg: Film edge on the roof above the A-pillar.
-  11-pillar-trim-gloss.jpg: Gloss black pillar trim after coating.
-  12-pillar-trim-rear-door.jpg: Rear door and pillar trim.
-  13-rear-quarter-gloss.jpg: Rear quarter. Coated paint showing the reflections.
-  14-rear-bumper.jpg: Rear bumper and diffuser.
+  07-ppf-edge-front-wing.jpg: Where the rear wing meets the rear door.
+  08-ppf-edge-door.jpg: Door and wing gap. Ceramic coating continues where the film stops.
+  09-ppf-edge-roof-pillar.jpg: Film edge on the roof above the A-pillar.
+  10-pillar-trim-gloss.jpg: Gloss black pillar trim, wrapped in PPF.
+  11-pillar-trim-rear-door.jpg: Rear door and pillar trim.
+  12-rear-quarter-gloss.jpg: Rear quarter. Coated paint showing the reflections.
+  13-rear-bumper.jpg: Rear bumper below the boot lid. A PPF strip on top protects the paint when loading the boot.
+  14-rear-bumper-detail.jpg: Film edge on the rear bumper. A small PPF strip behind the rear wheel catches stones thrown up by the tyre.
 ---
 
 Within days of collecting the car it went to a **Gyeon Certified Detailer** for a full protection
@@ -40,6 +40,10 @@ Gyeon PPF went on the areas that face the road. The green areas on the map below
 - **Headlights**
 - **Mirror caps**
 - **A-pillars** and the **front edge of the roof**
+- **Gloss black door pillar trims**
+- Two areas of the **rear bumper**:
+  - a strip along the top, below the boot lid, to protect the paint when loading and unloading
+  - a small strip low down behind each rear wheel, against dirt and stones thrown up by the tyres
 - **Side skirts**, the full length of both sides
 
 ![Map of the PPF coverage: front bumper, bonnet, front wings, headlights, mirrors, A-pillars, roof edge and side skirts highlighted in green](./ppf-coverage-map.jpg)
@@ -50,7 +54,7 @@ edges that do show are on the wing-to-door gap and the roof above the windscreen
 ## Ceramic coating
 
 After the film was fitted, the car was decontaminated and the paint and trim were ceramic-coated
-with Gyeon coating. That includes the gloss black pillar trims and the rear bumper. The coating
+with Gyeon coating, including the rear bumper. The coating
 adds depth to the Alpine White, makes the car much easier to wash, and helps dirt and water slide off.
 
 ## Aftercare
