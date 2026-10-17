@@ -54,7 +54,7 @@ const years = [...new Set(jobs.map((j) => j.data.date.getFullYear()))];
                     </div>
                     <div class="info">
                       <p class="meta">
-                        <time datetime={d.date.toISOString()}>{formatDate(d.date)}</time>
+                        <time datetime={d.date.toISOString()}>{d.dateLabel ?? formatDate(d.date)}</time>
                         <span class="chip">{d.category}</span>
                       </p>
                       <h3>{d.title}</h3>
