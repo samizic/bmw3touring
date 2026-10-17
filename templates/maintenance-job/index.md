@@ -14,6 +14,10 @@ cost: €180
 products:
   - Castrol EDGE 0W-30 LL04, 7 l
   - Mann HU 6004 x oil filter
+dateLabel: June 2025        # show this instead of the full date (the date still sorts)
+sections:                   # group the gallery under headings (unlisted photos go last)
+  - title: Before
+    files: [01-cover.jpg]
 captions:                   # gallery captions, keyed by file name in ./photos
   01-cover.jpg: The old filter coming out.
 draft: true                 # true = only visible in `npm run dev`, hidden on the live site

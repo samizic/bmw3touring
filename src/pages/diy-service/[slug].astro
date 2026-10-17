@@ -26,8 +26,17 @@ const d = job.data;
 const { Content } = await render(job);
 const photos = getJobPhotos(job);
 
+// Group the gallery into sections when the job defines them; leftovers go last
+const byFile = new Map(photos.map((p) => [p.file, p]));
+const sections = d.sections.length
+  ? d.sections.map((s) => ({ title: s.title, photos: s.files.map((f) => byFile.get(f)).filter((p) => p !== undefined) }))
+  : [{ title: '', photos }];
+const grouped = new Set(d.sections.flatMap((s) => s.files));
+const rest = d.sections.length ? photos.filter((p) => !grouped.has(p.file)) : [];
+if (rest.length) sections.push({ title: 'More photos', photos: rest });
+
 const facts = [
-  { label: 'Date', value: formatDate(d.date) },
+  { label: 'Date', value: d.dateLabel ?? formatDate(d.date) },
   { label: 'Category', value: d.category },
   d.mileage !== undefined && { label: 'Mileage', value: formatKm(d.mileage) },
   d.performedBy && { label: 'Done by', value: d.performedBy },
@@ -106,7 +115,12 @@ const facts = [
         <p class="eyebrow">Gallery</p>
         <h2 id="photos-title">Photos <span>{photos.length}</span></h2>
       </header>
-      <LightboxGallery photos={photos} />
+      {sections.map((sec) => (
+        <div class="gallery-section">
+          {sec.title && <h3>{sec.title} <span>{sec.photos.length}</span></h3>}
+          <LightboxGallery photos={sec.photos} />
+        </div>
+      ))}
     </section>
   )}
 
@@ -287,6 +301,16 @@ const facts = [
   .photos h2 {
     font-size: clamp(2.5rem, 5vw, 4rem);
     margin-top: 10px;
+  }
+  .gallery-section + .gallery-section { margin-top: clamp(40px, 5vw, 64px); }
+  .gallery-section h3 {
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    margin-bottom: 16px;
+  }
+  .gallery-section h3 span {
+    font-size: 0.55em;
+    vertical-align: super;
+    color: var(--m-light-blue);
   }
   .photos h2 span {
     font-size: 0.45em;
