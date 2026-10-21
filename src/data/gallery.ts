@@ -87,4 +87,14 @@ export const chapters: GalleryChapter[] = [
       { file: 'street-side-profile.jpg', caption: 'Side profile on the 19″ Style 793 summer wheels, old town street' },
     ],
   },
+  {
+    id: 'garage',
+    title: 'Underground',
+    when: 'October 2026',
+    photos: [
+      { file: 'garage-pair-rear.jpg', caption: 'Touring and saloon, rear three-quarter' },
+      { file: 'garage-pair-side.jpg', caption: 'Side by side with a G20 3 Series saloon in an underground car park' },
+      { file: 'garage-rear-wheel.jpg', caption: 'Roofline, tail light and 19″ Style 793 wheel' },
+    ],
+  },
 ];
