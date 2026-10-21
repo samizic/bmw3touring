@@ -23,7 +23,7 @@ export const chapters: GalleryChapter[] = [
       { file: 'pxl_20240217_110217598.jpg', caption: 'Rear three-quarter on a mountain road' },
       { file: 'pxl_20240217_110554476.jpg', caption: 'Side profile against the limestone cliffs' },
       { file: 'pxl_20240217_124125531.jpg', caption: 'Front three-quarter above a glassy Adriatic' },
-      { file: 'pxl_20240217_124148987_wheels.jpg', caption: 'Coast road pull-out, sea and sky' },
+      { file: 'coast-road-pullout-16x9.jpg', caption: 'Coast road pull-out, sea and sky' },
       { file: 'pxl_20240217_124235496.jpg', caption: 'Rear three-quarter on the coastal headland' },
       { file: 'pxl_20240217_124252537.jpg', caption: 'Tailgate and L-shaped lights facing the sea' },
       { file: 'pxl_20240217_124411502.jpg', caption: 'Heading down the coast road' },
