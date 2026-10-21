@@ -3,7 +3,7 @@
 
 export const header = {
   file: 'pxl_20260419_062622748-v2.jpg',
-  alt: 'The Alpine White 330d Touring on a hillside road above Primošten, with the old town and the Adriatic behind',
+  alt: 'The Alpine White 330d Touring on a hillside road above an old coastal town, with the Adriatic behind',
   focus: '30% 72%',
 };
 
@@ -31,8 +31,8 @@ export const chapters: GalleryChapter[] = [
     ],
   },
   {
-    id: 'gorski-kotar',
-    title: 'Fog in Gorski Kotar',
+    id: 'mountain-fog',
+    title: 'Fog in the mountains',
     when: 'March 2024',
     photos: [
       { file: 'pxl_20240310_062647944-mp-v1.jpg', caption: 'Morning fog among the pines' },
@@ -70,11 +70,11 @@ export const chapters: GalleryChapter[] = [
     ],
   },
   {
-    id: 'primosten',
-    title: 'Above Primošten',
+    id: 'panoramic-views',
+    title: 'Panoramic views',
     when: 'April 2026',
     photos: [
-      { file: 'pxl_20260419_062622748-v2.jpg', caption: 'Primošten old town and the islands below' },
+      { file: 'pxl_20260419_062622748-v2.jpg', caption: 'Old town and the islands below' },
       { file: 'pxl_20260419_062656851-v2.jpg', caption: 'Side profile over the bay' },
       { file: 'pxl_20260419_062800518-v2.jpg', caption: 'Front three-quarter, sea on the horizon' },
     ],
