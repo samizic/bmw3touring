@@ -64,7 +64,7 @@ compartments come up regularly on eBay.
 
 ## Template
 
-![The cut-out template: outer outline of the compartment, the inner cut line and the two top mounting holes](./template-preview.png)
+![The cut-out template: outer outline of the compartment, the inner cut line and the two top mounting holes](./template-preview-landscape.png)
 
 The template was drawn by **JoseSportM** and shared in the
 [Bimmerpost thread](https://g20.bimmerpost.com/forums/showthread/2046114/driver-storage-compartment-diy/)
